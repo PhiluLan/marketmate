@@ -1,0 +1,12 @@
+# Python
+backend/__pycache__/
+backend/*.py[cod]
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/.env
+
+# Docker
+**/postgres_data/
+

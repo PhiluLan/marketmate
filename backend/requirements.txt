@@ -1,0 +1,8 @@
+Django>=4.2,<5
+djangorestframework
+gunicorn
+psycopg2-binary
+django-environ
+dj-database-url
+redis
+celery
