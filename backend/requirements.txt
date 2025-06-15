@@ -3,6 +3,17 @@ djangorestframework
 gunicorn
 psycopg2-binary
 django-environ
+django-cors-headers
 dj-database-url
 redis
 celery
+requests>=2.0
+beautifulsoup4>=4.0
+requests
+beautifulsoup4
+openai
+djangorestframework-simplejwt
+scrapy>=2.11
+
+
+google-ads>=24.0.0
