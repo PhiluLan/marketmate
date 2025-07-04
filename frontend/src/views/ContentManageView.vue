@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { fetchContents, createContent } from '@/services/contentService.js'
+import { fetchContents, createContent } from '@/services/ContentService.js'
 
 export default {
   name: 'ContentManageView',
