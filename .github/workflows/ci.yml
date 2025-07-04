@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    name: Lint Python & JavaScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Python Lint
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with: python-version: '3.11'
+      - name: Install flake8
+        run: |
+          cd backend
+          pip install flake8
+      - name: Run flake8
+        run: |
+          cd backend
+          flake8 .
+
+      # JavaScript Lint
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with: node-version: '18'
+      - name: Install & Run ESLint
+        run: |
+          cd frontend
+          npm ci
+          npx eslint .
+
+  type-check:
+    name: Type-Check Python (mypy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: python-version: '3.11'
+      - name: Install mypy
+        run: |
+          cd backend
+          pip install mypy
+      - name: Run mypy
+        run: |
+          cd backend
+          mypy .
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Backend-Tests
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with: python-version: '3.11'
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+      - name: Run Django Tests
+        env:
+          DATABASE_URL: postgres://test:test@localhost:5432/test_db
+        run: |
+          cd backend
+          python manage.py migrate --no-input
+          pytest --maxfail=1 --disable-warnings -q
+
+      # Frontend-Tests (falls vorhanden)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with: node-version: '18'
+      - name: Install & Run Frontend Tests
+        run: |
+          cd frontend
+          npm ci
+          npm test
