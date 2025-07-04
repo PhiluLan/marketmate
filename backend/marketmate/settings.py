@@ -1,7 +1,11 @@
 # marketmate/settings.py
 
+import os
 from pathlib import Path
 import environ
+from celery.schedules import crontab
+from django.db.backends.signals import connection_created
+from django.dispatch import receiver
 
 # 1. BASE_DIR definieren
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,6 +21,8 @@ ALLOWED_HOSTS = []  # in Prod hier Liste füllen
 OPENAI_API_KEY = env('OPENAI_API_KEY')
 GOOGLE_API_KEY = env("GOOGLE_API_KEY")
 GOOGLE_CSE_ID  = env("GOOGLE_CSE_ID")
+
+ALLOWED_HOSTS = ["*"]
 
 # 4. CORS (Entwicklung)
 CORS_ALLOW_ALL_ORIGINS = True
@@ -41,9 +47,20 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'users',
     'websites',
-    'seo',
+    'apps.seo',
     'todos',
     'keywords.apps.KeywordsConfig',
+    'apps.persona_engine',
+    'apps.chat',
+    'apps.memory_service',
+    'apps.rag_service',
+    'apps.ads',
+    'apps.integrations',
+    'django_celery_beat',
+    'apps.dashboard',
+    'content_calendar',
+    'apps.content',
+    "apps.distribution",
 ]
 
 MIDDLEWARE = [
@@ -62,7 +79,7 @@ ROOT_URLCONF = 'marketmate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [], 
+        'DIRS': [os.path.join(BASE_DIR, "templates")], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,6 +93,9 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',  # Optional, falls du beide erlauben willst
@@ -125,3 +145,38 @@ LOGGING = {
         },
     },
 }
+
+CELERY_BEAT_SCHEDULE = {
+    'fetch_facebook_ads_every_10_seconds': {
+        'task': 'apps.ads.tasks.fetch_fb_ads_task',
+        'schedule': 10.0,   # alle 10 Sekunden zum Test
+        # alternativ: crontab(hour=0, minute=30) für täglich 00:30
+    },
+}
+
+# ─── Celery Broker & Result Backend ──────────────────────────
+# hier die beiden Zeilen hinzufügen:
+CELERY_BROKER_URL    = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+# ──────────────────────────────────────────────────────────────
+
+# Facebook
+FB_APP_ID               = env('APP_ID')
+FB_APP_SECRET           = env('APP_SECRET')
+META_OAUTH_REDIRECT_URI = env('META_OAUTH_REDIRECT_URI')
+FB_SYSTEM_TOKEN        = os.environ['FB_SYSTEM_TOKEN']
+
+# Frontend-URL
+FRONTEND_URL                 = os.environ.get("FRONTEND_URL","http://localhost:3000")
+
+# Celery über Redis
+CELERY_BROKER_URL            = os.environ.get('REDIS_URL','redis://localhost:6379/0')
+CELERY_RESULT_BACKEND        = os.environ.get('REDIS_URL','redis://localhost:6379/0')
+
+@receiver(connection_created)
+def set_sqlite_pragma(sender, connection, **kwargs):
+    engine = connection.settings_dict.get('ENGINE', '')
+    # nur dann PRAGMA ausführen, wenn SQLite genutzt wird
+    if 'sqlite3' in engine:
+        with connection.cursor() as cursor:
+            cursor.execute('PRAGMA journal_mode=WAL;')
