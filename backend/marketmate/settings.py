@@ -14,6 +14,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 env.read_env(BASE_DIR / '.env')  # legt fest, wo ENV-Datei liegt
 
+DATABASES = {
+    'default': env.db(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+}
+
 # 3. SECURITY
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-…')
 DEBUG = env.bool('DEBUG', default=True)
@@ -176,7 +180,6 @@ CELERY_RESULT_BACKEND        = os.environ.get('REDIS_URL','redis://localhost:637
 @receiver(connection_created)
 def set_sqlite_pragma(sender, connection, **kwargs):
     engine = connection.settings_dict.get('ENGINE', '')
-    # nur dann PRAGMA ausführen, wenn SQLite genutzt wird
     if 'sqlite3' in engine:
         with connection.cursor() as cursor:
             cursor.execute('PRAGMA journal_mode=WAL;')
