@@ -22,7 +22,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '@/services/AuthService'
+import api from '@/services/AuthService.js'
 
 const router = useRouter()
 const form = reactive({ name: '', url: '' })

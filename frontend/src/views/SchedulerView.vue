@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { fetchContents, fetchScheduledPosts, createScheduledPost } from '@/services/schedulerService'
+import { fetchContents, fetchScheduledPosts, createScheduledPost } from '@/services/schedulerService.js'
 import api from '@/api/api'
 
 export default {

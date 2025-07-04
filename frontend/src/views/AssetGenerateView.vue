@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import AssetService from '@/services/AssetService';
+import AssetService from '@/services/AssetService.js';
 
 export default {
   name: 'AssetGenerateView',

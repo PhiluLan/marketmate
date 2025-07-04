@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import ContentService from '@/services/ContentService';
+import ContentService from '@/services/ContentService.js';
 
 export default {
   name: 'ContentGenerateView',

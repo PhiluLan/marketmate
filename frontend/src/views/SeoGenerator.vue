@@ -44,7 +44,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import api from '@/services/AuthService'
+import api from '@/services/AuthService.js'
 
 // --- SEO-Analyse (Scrapy) ---
 const crawlUrl = ref('')

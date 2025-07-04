@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { getMe, logout } from '@/services/AuthService'
+import { getMe, logout } from '@/services/AuthService.js'
 
 const user = ref(null)
 
