@@ -8,5 +8,8 @@ class KeywordsConfig(AppConfig):
 
     def ready(self):
         conn = connections['default']
-        with conn.cursor() as cursor:
-            cursor.execute('PRAGMA journal_mode=WAL;')
+        engine = conn.settings_dict.get('ENGINE', '')
+        # nur bei SQLite das WAL-Pragma setzen
+        if 'sqlite3' in engine:
+            with conn.cursor() as cursor:
+                cursor.execute('PRAGMA journal_mode=WAL;')
