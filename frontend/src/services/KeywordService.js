@@ -1,5 +1,5 @@
 // src/services/KeywordService.js
-import api from '@/api'   // stellt deine axios-Instanz dar
+import api from '@/api/api.js';   // stellt deine axios-Instanz dar
 
 export default {
   /**

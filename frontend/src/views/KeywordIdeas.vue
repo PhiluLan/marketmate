@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import api from '@/api/api.js';
 
 export default {
   name: 'KeywordIdeas',

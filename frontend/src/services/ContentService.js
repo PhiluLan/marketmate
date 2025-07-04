@@ -1,5 +1,5 @@
 // src/services/ContentService.js
-import api from '@/api/api';  // dein Axios-Wrapper
+import api from '@/api/api.js';  // dein Axios-Wrapper
 const BASE = '/contents'
 
 export default {

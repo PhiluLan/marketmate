@@ -1,5 +1,5 @@
 // src/services/schedulerService.js
-import api from '@/api/api'
+import api from '@/api/api.js'
 
 // Wenn deine api-Instance bereits baseURL: '/api/v1' hat, brauchst du nur die Routen:
 export function fetchContents() {

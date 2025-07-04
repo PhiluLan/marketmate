@@ -1,5 +1,5 @@
 // src/services/SeoService.js
-import axios from 'axios'
+import api from '@/api/api.js';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/seo',
