@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+
+# Django migrations bytecode
+*/migrations/__pycache__/
+
+# Node
+frontend/node_modules/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Umgebungsvariablen
+.env
+.env.*
+
+# Build-Artefakte und Abhängigkeiten im Frontend
+/frontend/dist/
+/frontend/node_modules/
