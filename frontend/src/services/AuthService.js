@@ -1,17 +1,11 @@
 // frontend/src/services/AuthService.js
 import api from "@/api/api.js";
 
-/**
- * Named Exports
- * - initialize: Token aus localStorage holen und in api.defaults.headers.common["Authorization"] setzen.
- * - login: Login-Aufruf machen, Token in localStorage ablegen und in api.defaults setzen.
- * - register: Registrierung (ohne Authorization).
- * - logout: Token entfernen.
- * - getMe: /users/me/ abrufen.
- */
+const ACCESS_KEY  = "jwt_access_token";
+const REFRESH_KEY = "jwt_refresh_token";
 
 export function initialize() {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(ACCESS_KEY);
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
@@ -20,43 +14,39 @@ export function initialize() {
 }
 
 export async function login(email, password) {
-  // Vorhergehende Header entfernen (falls noch ein alter Token gesetzt war)
   delete api.defaults.headers.common["Authorization"];
 
-  // POST /users/login/ → { access: "<JWT-Token>" } zurückerwartet
-  const res = await api.post("/users/login/", { email, password });
+  // baseURL ist jetzt /api/v1, daher nur /token/
+  const res = await api.post("/token/", {
+    email,
+    password
+  });
 
-  // Prüfen, wo der Token im Response liegt (z.B. res.data.access oder res.data.token)
-  const token = res.data.access || res.data.token;
-  if (!token) {
-    throw new Error("Login hat keinen JWT-Token zurückgegeben.");
-  }
+  const { access, refresh } = res.data;
+  if (!access) throw new Error("Kein Access-Token erhalten");
 
-  // 1) Token in localStorage speichern
-  localStorage.setItem("token", token);
-  // 2) Header in Axios-Defaults setzen
-  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  localStorage.setItem(ACCESS_KEY, access);
+  localStorage.setItem(REFRESH_KEY, refresh);
+  api.defaults.headers.common["Authorization"] = `Bearer ${access}`;
 
   return res.data;
 }
 
 export async function register(email, password, role) {
-  // Vorherigen Authorization-Header entfernen (Registration braucht keinen Token)
   delete api.defaults.headers.common["Authorization"];
+  // baseURL /api/v1 → nur /users/
   return api.post("/users/", { email, password, role });
 }
 
 export function logout() {
-  localStorage.removeItem("token");
+  localStorage.removeItem(ACCESS_KEY);
+  localStorage.removeItem(REFRESH_KEY);
   delete api.defaults.headers.common["Authorization"];
 }
 
 export async function getMe() {
+  // holt jetzt /api/v1/users/me/
   return api.get("/users/me/");
 }
 
-/**
- * Default Export: Einfach das api-Objekt selbst, falls mal direkt verwendet.
- * (Nicht zwingend erforderlich, aber kann nützlich sein.)
- */
 export default api;

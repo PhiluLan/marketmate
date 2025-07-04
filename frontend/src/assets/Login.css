@@ -1,0 +1,84 @@
+/* marketmate/frontend/src/assets/Login.css */
+
+/* Frisch, frech, fröhlich & kraftvoll */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
+/* Body-Grundlagen */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f1f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Container: zentriert und mit Abstand */
+.max-w-sm.mx-auto {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rem auto 2rem;
+}
+
+/* Überschrift */
+h1 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Fehlermeldung */
+.error {
+  color: #e63946;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* Eingabefelder */
+input {
+  width: 90%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 300;
+}
+input:focus {
+  outline: none;
+  border-color: #5f27cd;
+  box-shadow: 0 0 8px rgba(95,39,205,0.3);
+}
+input::placeholder {
+  color: #adb5bd;
+}
+
+/* Button */
+button {
+  width: 90%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #5f27cd, #10ac84);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 700;
+}
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(95,39,205,0.3);
+}

@@ -30,3 +30,6 @@ const doLogin = async () => {
     </button>
   </div>
 </template>
+
+<style scoped src="@/assets/Login.css"></style>
+

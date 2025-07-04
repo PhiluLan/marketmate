@@ -1,0 +1,38 @@
+.journey-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.journey-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.journey-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+.touchpoint-input {
+  margin-top: 20px;
+  border-top: 1px dashed #ccc;
+  padding-top: 10px;
+}
+
+.touchpoint-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+input, textarea, select, button {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  font-size: 14px;
+  box-sizing: border-box;
+}

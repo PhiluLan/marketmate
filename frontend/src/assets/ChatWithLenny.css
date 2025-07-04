@@ -1,0 +1,148 @@
+/* marketmate/frontend/src/assets/ChatWithLenny.css */
+
+/* → Schriftart wie bei ChatGPT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* ROOT-CONTAINER */
+.flex.flex-col.h-full.max-w-2xl.mx-auto.p-4 {
+  font-family: 'Inter', sans-serif !important;
+  background: #ffffff !important;
+  border: 1px solid #eaeaea !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+  margin: 4rem auto 2rem !important;       /* Abstand unter Navi */
+  padding: 0 !important;                   /* wir packen Padding in Unterbereiche */
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: calc(100vh - 6rem) !important;/* Voller Viewport minus Navi */
+}
+
+/* CHAT-LOG (Scroll-Bereich) */
+.flex-1.overflow-auto.mb-4 {
+  padding: 1.5rem !important;
+  overflow-y: auto !important;
+  border-bottom: 1px solid #eaeaea !important;
+  flex: 1 !important;
+}
+.flex-1.overflow-auto.mb-4::-webkit-scrollbar {
+  width: 8px;
+}
+.flex-1.overflow-auto.mb-4::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+/* EINZELNE NACHRICHTEN (keine „Bubbles“, sondern Textblöcke mit Accent-Balken) */
+.my-2 {
+  margin: 1rem 0 !important;
+}
+.text-left > .inline-block,
+.text-right > .inline-block {
+  display: block !important;
+  background: none !important;
+  padding: 0 !important;
+  color: #111 !important;
+  position: relative !important;
+  line-height: 1.5 !important;
+  max-width: 100% !important;
+}
+/* Accent-Balken links = Bot */
+.text-left > .inline-block::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #10a37f;
+  border-radius: 4px;
+}
+/* Mensch (User): rechtsbündig in grauer Blase */
+.text-right > .inline-block {
+  display: inline-block !important;
+  background: #e0e0e0 !important;    /* hellgraue Blase */
+  color: #111111 !important;         /* dunkler Text */
+  border-radius: 12px !important;
+  padding: 0.75rem 1rem !important;
+  max-width: 70% !important;
+  text-align: right !important;
+}
+
+/* Chatbot: linksbündig ohne Blase */
+.text-left > .inline-block {
+  display: block !important;
+  background: none !important;      /* keine Blase */
+  padding: 0 !important;            /* kein extra Innenabstand */
+  border-radius: 0 !important;
+  color: #111111 !important;        /* einheitlicher Text */
+  max-width: 100% !important;
+  text-align: left !important;
+}
+
+/* EINGABEBEREICH */
+.flex.items-center.space-x-2 {
+  border-top: 1px solid #eaeaea !important;
+  padding: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  background: #fafafa !important;
+}
+
+/* TEXTFELD */
+.flex-1.border.rounded.px-3.py-2 {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+.flex-1.border.rounded.px-3.py-2::placeholder {
+  color: #888 !important;
+}
+
+/* SEND-BUTTON (ghost style wie ChatGPT) */
+.bg-blue-600.text-white.px-4.py-2.rounded {
+  background: none !important;
+  border: none !important;
+  color: #10a37f !important;
+  font-weight: 600 !important;
+  padding: 0.5rem !important;
+  transition: color 0.2s !important;
+}
+.bg-blue-600.text-white.px-4.py-2.rounded:not(:disabled):hover {
+  color: #0f766e !important;
+}
+.bg-blue-600.text-white.px-4.py-2.rounded:disabled {
+  opacity: 0.3 !important;
+  cursor: default !important;
+}
+
+/* BESTÄTIGUNGS-BUTTON */
+.mt-4.text-center > .bg-green-600.text-white.px-6.py-2.rounded {
+  background: none !important;
+  border: none !important;
+  color: #10a37f !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.2s !important;
+}
+.mt-4.text-center > .bg-green-600.text-white.px-6.py-2.rounded:hover {
+  color: #0f766e !important;
+}
+
+/* Bot-Accent-Pseudo-Element deaktivieren */
+.text-left > .inline-block::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* scrollbar fix für den Chat-Log */
+.chat-container .flex-1::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-container .flex-1::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}

@@ -1,0 +1,51 @@
+/* Frisch, frech, fröhlich & kraftvoll für heyLenny */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
+#app {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Haupt-Navi: Sticky, leichter Schatten */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Links & Button einheitlich stylen */
+.main-nav a,
+.main-nav button {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #555555;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Hover-Effekt */
+.main-nav a:hover,
+.main-nav button:hover {
+  background: rgba(95,39,205,0.1);
+  color: #5f27cd;
+}
+
+/* Aktiver Link */
+.main-nav .router-link-active {
+  background: linear-gradient(45deg, #5f27cd, #10ac84);
+  color: #ffffff;
+}
+
+/* Logout-Button als Textbutton */
+.main-nav button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -44,3 +44,6 @@ const registerUser = async () => {
     <p v-if="error" class="text-red-600 mt-2">{{ error }}</p>
   </div>
 </template>
+
+<style scoped src="@/assets/Register.css"></style>
+

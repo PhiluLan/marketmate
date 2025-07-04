@@ -1,0 +1,95 @@
+.calendar {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  grid-auto-rows: 28px;
+}
+
+.header-cell {
+  font-weight: bold;
+  background: #f3f4f6;
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.time-cell {
+  border: 1px solid #ccc;
+  text-align: right;
+  padding-right: 6px;
+  font-size: 12px;
+  background: #f9fafb;
+}
+
+.slot {
+  border: 1px solid #e5e7eb;
+  position: relative;
+  height: 28px;
+}
+
+.event {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  background: #60a5fa;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 10;
+}
+
+.all-day {
+  background: #facc15;
+  color: black;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+}
+
+.input,
+.textarea,
+select {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #666;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+.persona-form {
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-bottom: 24px;
+}
+
+.persona-form input,
+.persona-form textarea {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.persona-form button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
