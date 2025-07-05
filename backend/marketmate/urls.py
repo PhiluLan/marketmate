@@ -23,6 +23,6 @@ urlpatterns = [
     path('api/users/',    include('users.urls')),
     path('api/websites/', include('websites.urls')),
     path('api/keywords/', include('keywords.urls')),
-    path('api/seo/',      include('seo.urls')),
+    path('api/seo/',      include('apps.seo.urls')),
     path('api/todos/',    include('todos.urls')),
 ]
