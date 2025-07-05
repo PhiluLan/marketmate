@@ -1,0 +1,81 @@
+[
+  {
+    "name": "create_meta_ad_campaign",
+    "description": "Erstellt eine neue Meta-Ads-Kampagne mit allen nötigen Parametern.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "description": "Die Ad Account ID, z.B. '3916526251934359'."
+        },
+        "campaign_name": {
+          "type": "string",
+          "description": "Name der Kampagne."
+        },
+        "objective": {
+          "type": "string",
+          "enum": [
+            "OUTCOME_LEADS",
+            "OUTCOME_SALES",
+            "OUTCOME_ENGAGEMENT",
+            "OUTCOME_AWARENESS",
+            "OUTCOME_TRAFFIC",
+            "OUTCOME_APP_PROMOTION"
+          ],
+          "description": "Kampagnenziel (neue Outcome-Enums)."
+        },
+        "daily_budget": {
+          "type": "integer",
+          "description": "Tagesbudget in Cent."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PAUSED", "ACTIVE"],
+          "description": "Soll die Kampagne sofort live gehen?"
+        },
+        "spend_cap": {
+          "type": "integer",
+          "description": "Maximaler Gesamtausgaben-Cap in Cent."
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 Startzeitpunkt (UTC)."
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 Endzeitpunkt (UTC), optional."
+        },
+        "special_ad_categories": {
+          "type": "string",
+          "enum": ["NONE", "HOUSING", "CREDIT", "EMPLOYMENT"],
+          "description": "Sonderkategorie(n), als Einzelwert oder kommaseparierte Liste."
+        },
+        "buying_type": {
+          "type": "string",
+          "enum": ["AUCTION", "RESERVED"],
+          "description": "Kaufmodus."
+        },
+        "attribution_spec": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "event_type":  { "type": "string" },
+              "window_days": { "type": "integer" }
+            }
+          },
+          "description": "Attributionsmodell (z.B. [{event_type: 'LINK_CLICK', window_days: 7}])."
+        }
+      },
+      "required": [
+        "account_id",
+        "campaign_name",
+        "objective",
+        "daily_budget"
+      ]
+    }
+  }
+]

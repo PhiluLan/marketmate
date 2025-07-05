@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'users',
     'websites',
-    'seo',
+    'apps.seo',
     'todos',
     'keywords.apps.KeywordsConfig',
     'apps.persona_engine',
