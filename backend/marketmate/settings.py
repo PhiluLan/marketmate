@@ -132,6 +132,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+# Verzeichnis, in das collectstatic die Dateien sammelt
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING = {
