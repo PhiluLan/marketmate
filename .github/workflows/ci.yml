@@ -16,7 +16,8 @@ jobs:
       # Python Lint
       - name: Setup Python
         uses: actions/setup-python@v4
-        with: python-version: '3.11'
+        with:
+          python-version: '3.11'
       - name: Install flake8
         run: |
           cd backend
@@ -29,7 +30,8 @@ jobs:
       # JavaScript Lint
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        with: node-version: '18'
+        with:
+          node-version: '18'
       - name: Install & Run ESLint
         run: |
           cd frontend
@@ -41,8 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with: python-version: '3.11'
+      - name: Setup Python for mypy
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
       - name: Install mypy
         run: |
           cd backend
@@ -69,14 +73,14 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-
     steps:
       - uses: actions/checkout@v3
 
       # Backend-Tests
       - name: Setup Python
         uses: actions/setup-python@v4
-        with: python-version: '3.11'
+        with:
+          python-version: '3.11'
       - name: Install Backend Dependencies
         run: |
           cd backend
@@ -89,10 +93,11 @@ jobs:
           python manage.py migrate --no-input
           pytest --maxfail=1 --disable-warnings -q
 
-      # Frontend-Tests (falls vorhanden)
+      # Frontend-Tests
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        with: node-version: '18'
+        with:
+          node-version: '18'
       - name: Install & Run Frontend Tests
         run: |
           cd frontend
