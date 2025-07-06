@@ -1,6 +1,9 @@
 name: Smoke Tests
 
 on:
+# Manuelles Auslösen im UI
+  workflow_dispatch:
+  
   schedule:
     # alle 30 Minuten
     - cron: '*/30 * * * *'
