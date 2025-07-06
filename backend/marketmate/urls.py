@@ -17,9 +17,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('health/', lambda req: JsonResponse({'status': 'ok'})),
+    path('api/health/', lambda req: JsonResponse({'status': 'ok'})),
     path('api/users/',    include('users.urls')),
     path('api/websites/', include('websites.urls')),
     path('api/keywords/', include('keywords.urls')),
