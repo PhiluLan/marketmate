@@ -1,0 +1,27 @@
+name: Smoke Tests
+
+on:
+  schedule:
+    # alle 30 Minuten
+    - cron: '*/30 * * * *'
+
+jobs:
+  smoke:
+    name: Smoke test Frontend & API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Health-check Frontend
+        run: |
+          code=$(curl -o /dev/null -s -w "%{http_code}" https://heylenny.app/health/)
+          if [ "$code" != "200" ]; then
+            echo "Frontend health returned $code"
+            exit 1
+          fi
+
+      - name: Health-check API
+        run: |
+          code=$(curl -o /dev/null -s -w "%{http_code}" https://api.heylenny.app/api/health/)
+          if [ "$code" != "200" ]; then
+            echo "API health returned $code"
+            exit 1
+          fi
