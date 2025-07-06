@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Health-check Frontend
         run: |
-          code=$(curl -o /dev/null -s -w "%{http_code}" https://heylenny.app/health/)
+          code=$(curl -o /dev/null -s -w "%{http_code}" https://heylenny.app/)
           if [ "$code" != "200" ]; then
             echo "Frontend health returned $code"
             exit 1
