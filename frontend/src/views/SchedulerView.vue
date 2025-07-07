@@ -44,9 +44,12 @@
         :key="p.id" 
         class="border p-2 rounded flex justify-between"
       >
-        <span>{{ p.channel }} – {{ p.content.title }}</span>
-        <span>{{ p.scheduled_time | formatDate }}</span>
-        <span :class="statusClass(p.status)">{{ p.status }}</span>
+        <!-- statt p.content.title: -->
+        <span>{{ p.type }} – {{ p.title }}</span>
+        <!-- statt p.scheduled_time: -->
+        <span>{{ p.start | formatDate }}</span>
+        <!-- kein status-Feld vorhanden, entferne oder zeige type/status hier -->
+        <!-- <span :class="statusClass(p.status)">{{ p.status }}</span> -->
       </li>
     </ul>
   </div>
@@ -83,12 +86,15 @@ export default {
       }
       try {
         // siehe nächsten Schritt: wir wandeln hier gleich in ISO um
-        const dt = new Date(this.form.scheduled_time)
-        await createScheduledPost({
-          channel: this.form.channel,
-          content: this.form.content_id,
-          scheduled_time: dt.toISOString(),   // voller ISO-String
-        })
+      const dt = new Date(this.form.scheduled_time)
+      // finde den ausgewählten Content-Titel
+      const sel = this.contents.find(c => c.id === this.form.content_id)
+      await createScheduledPost({
+        title: sel?.title || 'Geplanter Post',
+        start: dt.toISOString(),
+        end:   dt.toISOString(),          // hier Endzeit gleich Start
+        type:  this.form.channel,         // entspricht TYPE_CHOICES
+      })
         this.form.scheduled_time = ''
         this.fetchScheduled()
       } catch (error) {

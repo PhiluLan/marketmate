@@ -2,9 +2,10 @@ from django.db import models
 
 class CalendarEvent(models.Model):
     TYPE_CHOICES = [
-        ('blog', 'Blog'),
-        ('social', 'Social'),
-        ('ads', 'Ads'),
+        ('facebook',     'Facebook (organisch)'),
+        ('instagram',    'Instagram (organisch)'),
+        ('facebook_ads', 'Facebook Ads'),
+        ('email',        'E-Mail'),
     ]
 
     title = models.CharField(max_length=200)

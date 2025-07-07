@@ -1,18 +1,16 @@
 // frontend/src/api/api.js
 import axios from 'axios'
 
-// 1) Hol dir die URL aus den Vite-Env-Variablen
-const BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
+// 1) Basis-URL aus der Env, default /api
+const BASE = import.meta.env.VITE_API_BASE_URL || '/api'
 
-
-export const api = axios.create({
-  // 2) Vollständiger Pfad auf Django-API root + version
-  baseURL: `${BASE}/api/v1`,
+const api = axios.create({
+  baseURL: BASE,                         // <— jetzt nur /api
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
+  withCredentials: true,                 // falls Cookies benötigt werden
 })
 
-// 3) JWT-Token (falls du ihn schon im localStorage hast)
+// 2) JWT-Token-Header setzen, falls vorhanden
 const token = localStorage.getItem('jwt_access_token')
 if (token) {
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`

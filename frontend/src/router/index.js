@@ -22,10 +22,13 @@ import ContentEditor from '@/views/ContentEditor.vue';
 import AssetGenerateView from '@/views/AssetGenerateView.vue';
 import SchedulerView         from '@/views/SchedulerView.vue'
 import ContentManageView from '@/views/ContentManageView.vue'
+import GoogleIntegrationView from '@/views/GoogleIntegrationView.vue'
+import LandingPage   from '@/views/LandingPage.vue'
 
 
 const routes = [
-  { path: '/',           name: 'Dashboard',  component: Dashboard },
+  { path: '/', name: 'Landing', component: LandingPage,},
+  { path: '/dashboard',           name: 'Dashboard',  component: Dashboard },
   { path: '/login',      name: 'Login',      component: Login },
   { path: '/register',   name: 'Register',   component: Register },
   { path: '/seo-audits', name: 'SeoAudits',  component: SeoAudits },
@@ -50,6 +53,7 @@ const routes = [
   { path: '/assets', name: 'Assets', component: AssetGenerateView },
   { path: '/scheduler', name: 'Scheduler', component: SchedulerView },
   { path: '/manage-contents', name: 'ManageContents', component: ContentManageView },
+  { path: '/integrations/google', name: 'GoogleIntegration', component: GoogleIntegrationView },
 ]
 
 export default createRouter({
