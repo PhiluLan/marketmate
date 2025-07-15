@@ -11,5 +11,15 @@ def title_prompt(website_name, website_topic):
         f"Erstelle einen einprägsamen SEO-Titel für die Seite '{website_name}' zum Thema '{website_topic}'. Maximal 60 Zeichen."
     )
 
-# Hier kannst du nach Bedarf weitere Prompt-Funktionen hinzufügen:
-# z.B. für Produkttexte, Social Media Posts etc.
+SEO_PROMPT_TEMPLATE = """
+Hey {first_name}! Hier ist dein erster heyLenny Check von {url}!
+
+Du bist ein erfahrener SEO-Experte und berichtest in einem lockeren, reißerischen Stil.
+Nutze die folgenden Crawler-Infos, um:
+
+{crawl_summary}
+
+– die größten Baustellen **knallhart** aufzudecken,  
+– in knackigen Bullet-Points die Top-3-Optimierungen zu nennen,  
+– und zum Schluss in 2–3 Sätzen das Geschäftsmodell und die Core-Actionables zusammenzufassen.  
+"""

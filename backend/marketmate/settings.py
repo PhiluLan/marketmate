@@ -166,8 +166,6 @@ CELERY_BEAT_SCHEDULE = {
 
 # ─── Celery Broker & Result Backend ──────────────────────────
 # hier die beiden Zeilen hinzufügen:
-CELERY_BROKER_URL    = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 # ──────────────────────────────────────────────────────────────
 
 # Facebook
@@ -177,11 +175,26 @@ META_OAUTH_REDIRECT_URI = env('META_OAUTH_REDIRECT_URI')
 FB_SYSTEM_TOKEN        = os.environ['FB_SYSTEM_TOKEN']
 
 # Frontend-URL
-FRONTEND_URL                 = os.environ.get("FRONTEND_URL","http://localhost:3000")
+FRONTEND_URL                 = os.environ.get("FRONTEND_URL","http://localhost:3001")
+
+# ─── Email-Konfiguration ────────────────────────────────────────
+# Email-Konfiguration
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST        = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT        = env.int('EMAIL_PORT', default=587)
+EMAIL_HOST_USER   = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS     = env.bool('EMAIL_USE_TLS', default=True)
+DEFAULT_FROM_EMAIL  = env('DEFAULT_FROM_EMAIL', default='noreply@deine-domain.de')
+DEFAULT_FROM_EMAIL_SUBJECT = env('DEFAULT_FROM_EMAIL_SUBJECT', default='Bitte bestätige deine E-Mail')
+
+DEBUG = True
+# ────────────────────────────────────────────────────────────────
+
 
 # Celery über Redis
-CELERY_BROKER_URL            = os.environ.get('REDIS_URL','redis://localhost:6379/0')
-CELERY_RESULT_BACKEND        = os.environ.get('REDIS_URL','redis://localhost:6379/0')
+CELERY_BROKER_URL     = env('REDIS_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = env('REDIS_URL', default='redis://localhost:6379/0')
 
 @receiver(connection_created)
 def set_sqlite_pragma(sender, connection, **kwargs):

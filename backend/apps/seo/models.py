@@ -38,6 +38,20 @@ class SEOAudit(models.Model):
     lcp = models.FloatField(null=True, blank=True, help_text="Largest Contentful Paint in ms")
     cls = models.FloatField(null=True, blank=True, help_text="Cumulative Layout Shift")
     tti = models.FloatField(null=True, blank=True, help_text="Time To Interactive in ms")
+
+        # ── Neue Social-Media-Felder ───────────────────────────
+    instagram_followers    = models.IntegerField(null=True, blank=True)
+    instagram_avg_likes    = models.IntegerField(null=True, blank=True)
+    instagram_avg_comments = models.IntegerField(null=True, blank=True)
+
+    facebook_followers     = models.IntegerField(null=True, blank=True)
+    facebook_avg_likes     = models.IntegerField(null=True, blank=True)
+    facebook_avg_comments  = models.IntegerField(null=True, blank=True)
+
+    linkedin_followers     = models.IntegerField(null=True, blank=True)
+    linkedin_avg_likes     = models.IntegerField(null=True, blank=True)
+    linkedin_avg_comments  = models.IntegerField(null=True, blank=True)
+    # ─────────────────────────────────────────────────────────
     redirect_chain_length = models.IntegerField(
         null=True, blank=True,
         help_text="Anzahl der Redirects bis zum finalen Ziel"

@@ -24,6 +24,7 @@ import SchedulerView         from '@/views/SchedulerView.vue'
 import ContentManageView from '@/views/ContentManageView.vue'
 import GoogleIntegrationView from '@/views/GoogleIntegrationView.vue'
 import LandingPage   from '@/views/LandingPage.vue'
+import VerifyEmail from '@/views/VerifyEmail.vue'
 
 
 const routes = [
@@ -54,6 +55,7 @@ const routes = [
   { path: '/scheduler', name: 'Scheduler', component: SchedulerView },
   { path: '/manage-contents', name: 'ManageContents', component: ContentManageView },
   { path: '/integrations/google', name: 'GoogleIntegration', component: GoogleIntegrationView },
+  { path: '/verify-email', name: 'VerifyEmail', component: VerifyEmail},
 ]
 
 export default createRouter({

@@ -6,6 +6,10 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [vue()],
   resolve: {
+    proxy: {
+      // Alle Aufrufe /api/* werden an Django auf Port 8000 geschickt
+      '/api': 'http://localhost:8000'
+    },
     alias: {
       // '@' → /path/to/frontend/src
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -14,7 +18,7 @@ export default defineConfig({
   extensions: ['.js', '.ts', '.vue', '.json'],
   server: {
     host: '0.0.0.0',
-    port: 3000,
+    port: 3001,
     proxy: {
       '/api': {
         target: process.env.VITE_API_PROXY_TARGET || 'http://localhost:8000',
